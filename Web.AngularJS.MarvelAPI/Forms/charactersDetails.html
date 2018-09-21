@@ -1,0 +1,94 @@
+﻿
+<style>
+    .espacoComicTitle {
+        margin-bottom: -16px;
+    }
+    .espacoSerieTitle {
+        margin-bottom: 30px;
+    }
+
+    a:hover .imgHero { border: 4px solid #000; }
+</style>
+
+<div class="container marketing" style="margin-top: 40px">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">
+                {{ characterName }}
+                <span class="text-muted"></span>
+            </h2>
+            <p class="lead">
+                {{ description }}
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="{{ characterImg }}" alt="{{ characterName }}" style="width: 457.5px; height: 457.5px">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- Comics -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Comics</h2>
+        </div>
+        <div class="col-sm-12">
+            <p class="lead">
+                {{ characterName }} appears in
+            </p>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-6" ng-repeat="comic in someComics" ng-class="{'espacoComicTitle': comic.title.length > 30}">
+            <div>
+                <a href="#/comics/{{ comic.id }}" class="thumbnail">
+                    <img class="imgHero" alt="{{ comic.title }}" src="{{comic.thumbnail.path}}/portrait_uncanny.{{comic.thumbnail.extension}}" data-holder-rendered="true" style="width: 262px; height: 394px; display: block;">
+                </a>
+                <h5>
+                    <b>{{ comic.title }}</b>
+                </h5>
+            </div>
+            <div class="col-md-3 col-xs-6" style="margin-bottom: 20px !important">
+            </div>
+        </div>
+        <div class="col-md-pull-6 pull-right">
+            <span class="btn btn-primary btn-lg" title="See all comics of {{ characterName }}">See all</span>
+        </div>      
+    </div>  
+    
+    <hr class="featurette-divider" />
+
+    <!-- Series -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Series</h2>
+        </div>
+        <div class="col-sm-12">
+            <p class="lead">
+                {{ characterName }} appears in
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-6" ng-repeat="serie in someSeries">
+            <div>
+                <a href="#/series/{{ serie.id }}" class="thumbnail">
+                    <img class="imgHero" alt="{{ serie.title }}" src="{{serie.thumbnail.path}}/portrait_uncanny.{{serie.thumbnail.extension}}" data-holder-rendered="true" style="width: 262px; height: 394px; display: block;">
+                </a>
+                <h5>
+                    <b>{{ serie.title }}</b>
+                </h5>
+                <p ng-class="{'espacoSerieTitle': serie.title.length < 60}">
+                    <span style="">{{ serie.startYear }}</span>
+                </p>
+            </div>           
+        </div>
+        <div class="col-md-pull-6 pull-right">
+            <span class="btn btn-primary btn-lg" title="See all comics of {{ characterName }}">See all</span>
+        </div>
+    </div>
+
+
+</div>
+

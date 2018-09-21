@@ -1,0 +1,22 @@
+﻿
+<link href="../Content/customStyles.css" rel="stylesheet" />
+
+<div infinite-scroll="more.load()" infinite-scroll-distance="0" class="container" style="padding-top: 30px;">
+    <div class="row">
+        <div class="col-md-3 col-xs-6" ng-repeat="comic in more.comics" ng-class="{'espacoComicTitle': comic.title.length < 110}">
+            <div>
+                <a href="#/comics/{{ comic.id }}" class="thumbnail">
+                    <img class="imgHero" alt="{{ comic.title }}" src="{{comic.thumbnail.path}}/portrait_uncanny.{{comic.thumbnail.extension}}" data-holder-rendered="true" style="width: 216px; height: 324px; display: block;">
+                </a>
+                <h5>
+                    <span style="font-weight: bold; color: #000000">{{ comic.title }}</span>
+                </h5>
+            </div>
+            <div class="col-md-3 col-xs-6" style="margin-bottom: 20px !important">
+            </div>
+        </div>
+        <!--<div class="col-md-pull-6 pull-right">
+            <span class="btn btn-primary btn-lg">See all</span>
+        </div>-->
+    </div>
+</div>

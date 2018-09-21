@@ -1,0 +1,102 @@
+﻿app.controller("charactersController", ['$scope', '$window', '$routeParams', '$location','CharacterService',
+
+    function ($scope, $window, $routeParams, $location, CharacterService) {
+        
+        // Listar os personagens
+        CharacterService.findAll()
+            .then(
+                function (data) {
+                    $scope.characters = data.data.results;
+
+                    var total = data.data.total;
+                    var offset = data.data.offset;
+                    var limit = data.data.limit;
+                    var count = data.data.count;
+                    
+                    $scope.offset = offset;
+                    $scope.limit = limit;
+                    $scope.total = total;
+                    $scope.count = count;
+                    $scope.pagination = [];
+
+                    var pages = [];
+                    var totalPages = Math.round(total / limit);
+                    for (var i = 1; i < totalPages; i++) {
+                        pages.push(i);
+                    }
+                    $scope.pagination = pages;
+                    
+                },
+                function (reason) {
+                    $scope.error = reason;
+                }
+            )
+
+        // Definindo o offset para as paginas da paginacao
+        var offset = $routeParams.offset;
+
+        $scope.findNext = function (offset) {
+            $location.path('/characters/' + offset);
+        }
+
+        $scope.findFirst = function () {
+            $location.path('/characters');
+        }
+
+        $scope.findLast = function () {
+            offset = totalPages;
+            $location.path('/characters/' + offset);
+        }
+
+        // Encontrar um personagem pelo ID
+        var id = $routeParams.id;
+
+        if (id != null) {
+            CharacterService.findOneById(id)
+                .then(
+                    function (response) {
+                        var data = response.data.results[0];
+                        $scope.characterName = data.name;
+                        $scope.characterUrl = data.urls;
+                        $scope.characterImg = data.thumbnail.path + '/detail.' + data.thumbnail.extension;
+                        var desc = data.description;
+                        if (desc.length <= 0) {
+                            desc = "No description provided";
+                        }
+                        $scope.description = desc;
+
+                        //retorna alguns gibs
+                        CharacterService.findSomeComicsByCharacter(id)
+                            .then(
+                                function (response) {
+                                    var data = response.data.results;
+                                    $scope.someComics = data;
+                                },
+                                function (reason) {
+                                    $scope.error = reason;
+                                }
+                            );
+
+                        //retorna algumas series
+                        CharacterService.findSomeSeriesByCharacter(id)
+                            .then(
+                                function (response) {
+                                    var data = response.data.results;
+                                    $scope.someSeries = data;
+                                },
+                                function (reason) {
+                                    $scope.error = reason;
+                                }
+                            );
+
+
+
+                                               
+                    },
+                    function (reason) {
+                        $scope.error = reason;
+                    }
+                );
+        } // [FIM] Encontrar um personagem pelo ID
+
+    }]);

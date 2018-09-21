@@ -1,0 +1,17 @@
+﻿
+<section class="" style="padding-top: 40px">
+    <div infinite-scroll="more.load()" infinite-scroll-distance="0" class="container">
+        <div class="row">
+            <div class="col-sm-3" ng-repeat="creator in more.creators">
+                <div ng-if="creator.thumbnail.path.includes('image_not_available')">
+                    <a href="#/creatorDetails/{{ creator.id }}">
+                        <img class="img-circle center-block" src="{{ creator.thumbnail.path }}/standard_fantastic.{{ creator.thumbnail.extension }}" alt="{{ creator.fullName }}" title="{{ creator.fullName }}" width="200" height="200"/>
+                    </a>
+                    <p align="center" style="padding-top: 10px">
+                        <b>{{ creator.fullName }}</b>
+                    </p>
+                </div>
+            </div> 
+        </div>
+    </div>
+</section>

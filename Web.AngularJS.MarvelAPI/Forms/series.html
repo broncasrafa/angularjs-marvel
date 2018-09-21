@@ -1,0 +1,26 @@
+﻿
+<link href="../Content/customStyles.css" rel="stylesheet" />
+
+<!-- infinite-scroll-disabled="more.busy()"  -->
+<div infinite-scroll="more.load()" infinite-scroll-distance="0" class="container" style="padding-top: 30px;">
+    
+    <h2>
+        FEATURED SERIES
+        <!--<div style="float: right; margin-right: 20px;">
+            <span style="font-size:14px"> Showing: {{ total }} Results</span>
+        </div>-->      
+    </h2>
+    
+    <div class="col-md-3 col-xs-6" ng-repeat="serie in more.series" ng-class="{'espacoSerieTitle': serie.title.length < 150}">
+        <div>
+            <a href="#/series/{{ serie.id }}" class="thumbnail">
+                <img class="imgHero" src="{{ serie.thumbnail.path}}/standard_fantastic.{{ serie.thumbnail.extension }}" alt="{{ serie.name }}" title="{{ serie.name }}" data-holder-rendered="true" style="width: 250px; height: 250px; display: block;">
+            </a>
+            <h5>
+                <b>{{ serie.title }}</b>
+            </h5>
+        </div>
+        <div class="col-md-3 col-xs-6" style="margin-bottom: 20px !important">
+        </div>
+    </div>
+</div>

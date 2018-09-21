@@ -1,0 +1,232 @@
+﻿
+<link href="../Content/customStyles.css" rel="stylesheet" />
+
+<style>
+    .espComicTitle {
+        width: 160.5px;
+        height: 200px;
+        margin-top: 30px;
+    }
+
+    .espCharacterName {
+        width: 160.5px;
+        height: 200px;
+        margin-top: 30px;
+    }
+
+    .thumb {
+        margin-bottom: 30px;
+    }
+</style>
+
+<section class="container-comics" style="padding-bottom: 40px;">
+    <div class="container" style="padding-top: 30px">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="frame-img" alt="{{ title }}" title="{{ title }}" src="{{ image }}" width="216" height="324">
+            </div>
+            <div class="col-md-9">
+                <h1 class="comic-font">{{ title }}</h1>
+                <br />
+                <div ng-repeat="date in dates">
+                    <span class="comic-font" ng-if="date.type == 'onsaleDate'">
+                        <b>Published:</b> {{ date.date | date:'dd/MM/yyyy'}}
+                    </span>
+                </div>
+
+                <div ng-repeat="creator in creators">
+                    <span class="comic-font" ng-if="creator.role == 'writer'">
+                        <b>Writer:</b> {{ creator.name }}
+                    </span>
+                </div>
+
+                <div ng-repeat="creator in creators">
+                    <span class="comic-font" ng-if="creator.role.includes('penciller')">
+                        <b>Penciller:</b> {{ creator.name }}
+                    </span>
+                </div>
+
+                <div ng-repeat="creator in creators">
+                    <span class="comic-font" ng-if="creator.role == 'writer'">
+                        <b>Cover Artist:</b> {{ creator.name }}
+                    </span>
+                </div>
+                <br />
+                <p ng-if="description != '' || description != null">
+                    <span class="comic-font">{{ description }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- More Details -->
+<section class="more-details-comics" style="padding-bottom: 70px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h3 style="color: #ffffff">More Details</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <span style="color: #ffffff;">EXTENDED CREDITS AND INFO</span>
+                <p style="color: #ffffff;">
+                    <b>Format: </b>{{ format }}
+                    <br />
+                    <b>Price: </b> {{ price | currency }}
+                    <br />
+                    <b>UPC: </b> {{ upc }}
+                </p>
+            </div>
+            <div class="col-sm-3">
+                <span style="color: #ffffff;">COVER INFORMATION</span>
+                <p style="color: #ffffff;">
+                    <div ng-repeat="creator in creators">
+                        <span class="comic-font" ng-if="creator.role.includes('penciller')">
+                            <b>Penciller (cover):</b>
+                            <br />
+                            {{ creator.name }}
+                        </span>
+                    </div>
+                    <div ng-repeat="creator in creators">
+                        <span class="comic-font" ng-if="creator.role.includes('editor')">
+                            <b>Editor:</b>
+                            <br />
+                            {{ creator.name }}
+                        </span>
+                    </div>
+                </p>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <span style="color: #ffffff;">STORIES</span>
+                <p style="color: #ffffff;">
+                    <div ng-repeat="creator in creators">
+                        <span class="comic-font" ng-if="creator.role == 'writer'">
+                            <b>Writer:</b>
+                            <br />
+                            {{ creator.name }}
+                        </span>
+                    </div>
+                    <div ng-repeat="creator in creators">
+                        <span class="comic-font" ng-if="creator.role.includes('penciller')">
+                            <b>Penciller:</b>
+                            <br />
+                            {{ creator.name }}
+                        </span>
+                    </div>
+                    <div ng-repeat="creator in creators">
+                        <span class="comic-font" ng-if="creator.role.includes('editor')">
+                            <b>Editor:</b>
+                            <br />
+                            {{ creator.name }}
+                        </span>
+                    </div>
+                </p>
+            </div>
+            <div class="col-sm-10"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Creators -->
+<!--<section class="container-comics" style="padding-bottom: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3 class="comic-font">Creators</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="creator in creators">
+                <span class="comic-font"><span style="font-size:18px">{{ creator.name }}</span> - <b>{{ creator.role }}</b></span>
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<!-- Charactes -->
+<section class="container-comics">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h1 class="comic-font">Charactes</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2" ng-repeat="character in characters" ng-class="{'espCharacterName': character.name.length < 50}">
+                <a href="#/characterDetails/{{ character.id }}">
+                    <img class="img-circle" src="{{ character.thumbnail.path }}/standard_large.{{ character.thumbnail.extension }}" alt="{{ character.name }}" title="{{ character.name }}" />
+                </a>
+                <p>
+                    <span class="comic-font">{{ character.name }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stories -->
+<!--<section class="container-comics_3">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h1 class="comic-font">Stories</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="storie in stories">
+                <span class="comic-font">
+                    <span style="font-size:18px">{{ storie.name }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<!-- Images -->
+<section style="padding-bottom: 40px; padding-top: 30px">
+    <div class="container">
+        <div class="row">            
+            <div class="col-lg-12">
+                <h1 class="page-header">Comic Gallery</h1>
+            </div>
+            <div class="col-lg-2" ng-repeat="img in images" style="height: 300px !important">
+                <img src="{{img.path}}.{{ img.extension }}" class="thumbnail img-responsive" width="165" height="250">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Series -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-pull-12">
+            <h1>
+                More {{ series.name }}                
+                <a href="#/series/{{ serieId }}" role="button" class="btn btn-primary btn-sm" style="float: right;font-size: 21px;display: block;text-transform: none;">See All</a>
+            </h1>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col-md-3 col-xs-6" ng-repeat="comic in comicsFromSeries" ng-class="{'espacoComicTitle': comic.title.length < 110}">
+            <div>
+                <a href="#/comics/{{ comic.id }}" class="thumbnail">
+                    <img class="imgHero" alt="{{ comic.title }}" src="{{comic.thumbnail.path}}/portrait_uncanny.{{comic.thumbnail.extension}}" data-holder-rendered="true" style="width: 216px; height: 324px; display: block;">
+                </a>
+                <h5>
+                    <span style="font-weight: bold; color: #000000">{{ comic.title }}</span>
+                </h5>
+            </div>
+            <div class="col-md-3 col-xs-6" style="margin-bottom: 20px !important">
+            </div>
+        </div>
+    </div>
+</div>

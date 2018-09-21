@@ -1,0 +1,123 @@
+﻿<link href="../Content/customStyles.css" rel="stylesheet" />
+
+
+<style>
+    .espComicTitle {
+        width: 160.5px;
+        height: 200px;
+        margin-top: 30px;
+    }
+
+    .espCharacterName {
+        width: 160.5px;
+        height: 200px;
+        margin-top: 30px;
+    }
+</style>
+
+<section class="container-comics" style="padding-bottom: 40px;">
+    <div class="container" style="padding-top: 30px">
+        <div class="row">
+            <div class="col-md-3">
+                <img alt="{{ title }}" title="{{ title }}" src="{{ image }}" width="250" height="250">
+            </div>
+            <div class="col-md-9">
+                <h1 class="comic-font">
+                    {{ title }}
+                </h1>
+                <br />
+                <span class="comic-font">
+                    <b>Rating:</b> {{ rating }}
+                </span>
+                <br />
+                <p ng-if="description != '' || description != null">
+                    <span class="comic-font">{{ description }}</span>
+                </p>
+                <p>
+                    <span class="comic-font">{{ date }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Creators -->
+<section class="more-details-comics">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h1 class="comic-font">Creators</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="creator in creators">
+                <span class="comic-font"><span style="font-size:18px">{{ creator.name }}</span> - <b>{{ creator.role }}</b></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comics -->
+<section class="container-comics more-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h1 class="comic-font">Comics</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" ng-repeat="comic in comics" ng-class="{'espComicTitle': comic.title.length < 110}">
+                <a href="#/comics/{{ comic.id }}">
+                    <img src="{{ comic.thumbnail.path }}/standard_large.{{ comic.thumbnail.extension }}" alt="{{ comic.title }}" title="{{ comic.title }}" height="140" width="140"/>
+                </a>
+                <p>
+                    <span class="comic-font">{{ comic.title }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Stories -->
+<section class="container-comics_2 ">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h1 class="comic-font">Stories</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="storie in stories">
+                <span class="comic-font">
+                    <span style="font-size:18px">{{ storie.title }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Charactes -->
+<section class="more-details-comics">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h1 class="comic-font">Charactes</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2" ng-repeat="character in characters" ng-class="{'espCharacterName': character.name.length < 50}">
+                <a href="#/characterDetails/{{ character.id }}">
+                    <img class="img-circle" src="{{ character.thumbnail.path }}/standard_large.{{ character.thumbnail.extension }}" alt="{{ character.name }}" title="{{ character.name }}" />
+                </a>
+                <p>
+                    <span class="comic-font">{{ character.name }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
